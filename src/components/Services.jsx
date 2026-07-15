@@ -38,15 +38,14 @@ export default function Services() {
       },
       { threshold: 0.1 }
     )
-
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <section ref={sectionRef} id="services" className="py-16 md:py-24 bg-white">
-      <div className="container-custom">
-        <div className={`max-w-3xl transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <section ref={sectionRef} id="services" className="py-16 md:py-24 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`text-center max-w-3xl mx-auto transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <span className="text-sm font-semibold text-[#D94801] uppercase tracking-wider">
             Our Services
           </span>
@@ -63,7 +62,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-[#D94801]/30 ${
+              className={`bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-[#D94801]/30 ${
                 isVisible ? 'opacity-100' : 'opacity-0'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}

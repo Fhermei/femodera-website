@@ -1,4 +1,60 @@
 import { useEffect } from 'react'
+import { X } from 'lucide-react'
+import {
+  SiDjango,
+  SiReact,
+  SiPostgresql,
+  SiJsonwebtokens,
+  SiDocker,
+  SiFlask,
+  SiTensorflow,
+  SiPython,
+  SiPytorch,
+  SiScikitlearn,
+  SiNumpy,
+  SiPandas,
+  SiJavascript,
+  SiSupabase,
+  SiVercel,
+  SiStreamlit,
+  SiOpencv,
+  SiBootstrap,
+} from 'react-icons/si'
+
+// Map technology names to their icons and colors
+const techIconMap = {
+  'Django': { icon: SiDjango, color: '#092E20' },
+  'React': { icon: SiReact, color: '#61DAFB' },
+  'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
+  'JWT': { icon: SiJsonwebtokens, color: '#000000' },
+  'Docker': { icon: SiDocker, color: '#2496ED' },
+  'React Native': { icon: SiReact, color: '#61DAFB' },
+  'Flask': { icon: SiFlask, color: '#000000' },
+  'TensorFlow': { icon: SiTensorflow, color: '#FF6F00' },
+  'CNN': { icon: SiTensorflow, color: '#FF6F00' },
+  'Python': { icon: SiPython, color: '#3776AB' },
+  'PyTorch': { icon: SiPytorch, color: '#EE4C2C' },
+  'Scikit-learn': { icon: SiScikitlearn, color: '#F7931E' },
+  'NumPy': { icon: SiNumpy, color: '#013243' },
+  'Pandas': { icon: SiPandas, color: '#150458' },
+  'JavaScript': { icon: SiJavascript, color: '#F7DF1E' },
+  'Supabase': { icon: SiSupabase, color: '#3ECF8E' },
+  'Vercel': { icon: SiVercel, color: '#000000' },
+  'Streamlit': { icon: SiStreamlit, color: '#FF4B4B' },
+  'OpenCV': { icon: SiOpencv, color: '#5C3EE8' },
+  'Bootstrap': { icon: SiBootstrap, color: '#7952B3' },
+  'Ethereum': { icon: SiPython, color: '#3C3C3D' },
+  'SHA-256': { icon: SiPython, color: '#3C3C3D' },
+  'Data Analytics': { icon: SiPython, color: '#3776AB' },
+  'Research': { icon: SiPython, color: '#3776AB' },
+  'Data Analysis': { icon: SiPython, color: '#3776AB' },
+  'Economics': { icon: SiPython, color: '#3776AB' },
+  'SPSS': { icon: SiPython, color: '#3776AB' },
+  'Machine Learning': { icon: SiPython, color: '#3776AB' },
+  'Computer Vision': { icon: SiPython, color: '#3776AB' },
+  'NLP': { icon: SiPython, color: '#3776AB' },
+  'NLTK': { icon: SiPython, color: '#3776AB' },
+}
 
 export default function ProjectModal({ project, onClose }) {
   useEffect(() => {
@@ -6,32 +62,38 @@ export default function ProjectModal({ project, onClose }) {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleEscape)
+    // Only prevent scroll when modal is open
     document.body.style.overflow = 'hidden'
     return () => {
       document.removeEventListener('keydown', handleEscape)
+      // Restore scroll when modal closes
       document.body.style.overflow = 'unset'
     }
   }, [onClose])
 
   if (!project) return null
 
+  // Get tech icons with colors for modal
+  const techIcons = project.technologies.map(tech => {
+    const techData = techIconMap[tech]
+    return techData ? { ...techData, name: tech } : null
+  }).filter(Boolean)
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={onClose}>
       <div 
-        className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden"
+        className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden mx-4"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
         >
-          <svg className="w-5 h-5 text-[#1D2B49]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X className="w-5 h-5 text-[#1D2B49]" />
         </button>
 
         <div className="p-6 md:p-8 max-h-[80vh] overflow-y-auto">
-          <span className="inline-flex px-3 py-1 text-xs font-medium text-[#D94801] bg-[#D94801]/10 rounded-full mb-4">
+          <span className="inline-flex px-3 py-1 text-xs font-medium text-[#1D2B49] bg-[#1D2B49]/10 rounded-full mb-4">
             {project.category}
           </span>
 
@@ -49,18 +111,22 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           <div className="mb-8">
-            <h4 className="text-sm font-semibold text-[#1D2B49]/60 uppercase tracking-wider mb-2">
+            <h4 className="text-sm font-semibold text-[#1D2B49]/60 uppercase tracking-wider mb-3">
               Technologies
             </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span 
-                  key={tech}
-                  className="px-3 py-1.5 text-xs font-medium text-[#1D2B49] bg-gray-100 rounded-lg"
-                >
-                  {tech}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-3">
+              {techIcons.map((tech) => {
+                const Icon = tech.icon
+                return (
+                  <div 
+                    key={tech.name}
+                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100"
+                  >
+                    <Icon className="text-base" style={{ color: tech.color }} size={16} />
+                    <span className="text-sm font-medium text-[#1D2B49]">{tech.name}</span>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
