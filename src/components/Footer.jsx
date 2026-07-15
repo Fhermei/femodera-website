@@ -1,69 +1,48 @@
-import logo from "../assets/logo.png";
+import logo from '../assets/logo.png'
 
 export default function Footer() {
   return (
-    <footer
-      className="pt-20 pb-10 text-gray-300"
-      style={{ backgroundColor: "#3B2A1A" }}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-
-          {/* Brand */}
+    <footer className="bg-[#1D2B49] text-white/80">
+      <div className="container-custom py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <img
-              src={logo}
-              alt="Femodera logo"
-              className="h-10 mb-6"
-            />
-            <p className="max-w-md text-gray-300 leading-relaxed">
-              Femodera is an academic and technology support lab focused on
-              ethical research assistance, data analytics, and engineering-grade
-              software solutions.
+            <img src={logo} alt="Fera Digital Solutions" className="h-10 mb-4 brightness-0 invert" />
+            <p className="text-sm text-white/60 leading-relaxed max-w-md">
+              Fera Digital Solutions is a technology innovation and research lab 
+              delivering software development, AI/ML solutions, and academic 
+              research support for clients worldwide.
             </p>
           </div>
 
-          {/* Navigation */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-gray-100">
-              Navigation
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              Quick Links
             </h4>
-            <ul className="mt-6 space-y-3 text-sm">
-              <li><a href="#services" className="hover:text-white">Services</a></li>
-              <li><a href="#projects" className="hover:text-white">Projects</a></li>
-              <li><a href="#about" className="hover:text-white">About Us</a></li>
-              <li><a href="#contact" className="hover:text-white">Contact</a></li>
+            <ul className="space-y-3">
+              <li><a href="#services" className="text-sm text-white/60 hover:text-white transition-colors">Services</a></li>
+              <li><a href="#projects" className="text-sm text-white/60 hover:text-white transition-colors">Projects</a></li>
+              <li><a href="#about" className="text-sm text-white/60 hover:text-white transition-colors">About</a></li>
+              <li><a href="#contact" className="text-sm text-white/60 hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wide text-gray-100">
-              Contact
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              Contact Info
             </h4>
-            <ul className="mt-6 space-y-3 text-sm">
-              <li>📞 +234 706 175 4538</li>
-              <li>✉️ femoderalab@gmail.com</li>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li>femoderalab@gmail.com</li>
+              <li>+234 810 610 8753</li>
+              <li>Nigeria</li>
             </ul>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="my-12 h-px bg-white/10" />
-
-        {/* Bottom */}
-        <div className="flex flex-col sm:flex-row items-center justify-between text-sm text-gray-400">
-          <p>
-            © {new Date().getFullYear()} Femodera. All rights reserved.
-          </p>
-          <p className="mt-4 sm:mt-0">
-            Built with academic integrity & technical excellence.
-          </p>
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+          <p>© {new Date().getFullYear()} Fera Digital Solutions. All rights reserved.</p>
+          <p>Built by Oyewole Oluwafemi David</p>
         </div>
-
       </div>
     </footer>
-  );
+  )
 }
