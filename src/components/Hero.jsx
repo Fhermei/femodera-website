@@ -1,6 +1,6 @@
 export default function Hero({ onGetStarted }) {
   return (
-    <section id="home" className="pt-[200px] md:pt-[120px] pb-20 md:pb-32 bg-white">
+    <section id="home" className="pt-[200px] md:pt-[220px] pb-20 md:pb-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#1D2B49] leading-tight max-w-4xl mx-auto">
           Building the Future of

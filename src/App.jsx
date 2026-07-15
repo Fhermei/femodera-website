@@ -9,10 +9,12 @@ import Footer from './components/Footer'
 import GetStartedModal from './components/GetStartedModal'
 import PrivacyPolicy from './components/PrivacyPolicy'
 import TermsOfService from './components/TermsOfService'
+import SuccessPage from './components/SuccessPage'
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState('home')
+  const [showSuccess, setShowSuccess] = useState(false)
 
   // Handle hash routing
   useEffect(() => {
@@ -34,22 +36,52 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
-  // Privacy Policy page - standalone with back button
-  if (currentPage === 'privacy') {
+  // Handle successful form submission
+  const handleFormSuccess = () => {
+    setShowSuccess(true)
+    window.scrollTo(0, 0)
+  }
+
+  const handleBackHome = () => {
+    setShowSuccess(false)
+    window.location.hash = ''
+    window.scrollTo(0, 0)
+  }
+
+  // If showing success page - NO NAVBAR
+  if (showSuccess) {
     return (
       <>
-        <PrivacyPolicy />
-        <GetStartedModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <SuccessPage onBackHome={handleBackHome} />
+        <Footer />
       </>
     )
   }
 
-  // Terms of Service page - standalone with back button
+  // Privacy Policy page
+  if (currentPage === 'privacy') {
+    return (
+      <>
+        <PrivacyPolicy />
+        <GetStartedModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          onSuccess={handleFormSuccess}
+        />
+      </>
+    )
+  }
+
+  // Terms of Service page
   if (currentPage === 'terms') {
     return (
       <>
         <TermsOfService />
-        <GetStartedModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <GetStartedModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          onSuccess={handleFormSuccess}
+        />
       </>
     )
   }
@@ -62,9 +94,13 @@ export default function App() {
       <Services />
       <Projects />
       <About />
-      <Contact />
+      <Contact onSuccess={handleFormSuccess} />
       <Footer />
-      <GetStartedModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <GetStartedModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        onSuccess={handleFormSuccess}
+      />
     </>
   )
 }
