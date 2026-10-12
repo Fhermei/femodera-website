@@ -3,7 +3,9 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import Projects from './components/Projects'
+import AllProjects from './components/AllProjects'
 import About from './components/About'
+import AboutUs from './components/AboutUs'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import GetStartedModal from './components/GetStartedModal'
@@ -26,8 +28,15 @@ export default function App() {
       } else if (hash === 'terms') {
         setCurrentPage('terms')
         window.scrollTo(0, 0)
+      } else if (hash === 'projects-all') {
+        setCurrentPage('projects-all')
+        window.scrollTo(0, 0)
       } else {
         setCurrentPage('home')
+        // Coming back from another page: jump to the section after the home page renders
+        if (hash) {
+          setTimeout(() => document.getElementById(hash)?.scrollIntoView(), 60)
+        }
       }
     }
 
@@ -63,9 +72,9 @@ export default function App() {
     return (
       <>
         <PrivacyPolicy />
-        <GetStartedModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
+        <GetStartedModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
           onSuccess={handleFormSuccess}
         />
       </>
@@ -77,9 +86,25 @@ export default function App() {
     return (
       <>
         <TermsOfService />
-        <GetStartedModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
+        <GetStartedModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSuccess={handleFormSuccess}
+        />
+      </>
+    )
+  }
+
+  // All projects page (opened by "Load more")
+  if (currentPage === 'projects-all') {
+    return (
+      <>
+        <Navbar onGetStarted={() => setIsModalOpen(true)} />
+        <AllProjects />
+        <Footer />
+        <GetStartedModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
           onSuccess={handleFormSuccess}
         />
       </>
@@ -93,12 +118,12 @@ export default function App() {
       <Hero onGetStarted={() => setIsModalOpen(true)} />
       <Services />
       <Projects />
-      <About />
+      <AboutUs onGetStarted={() => setIsModalOpen(true)} />
       <Contact onSuccess={handleFormSuccess} />
       <Footer />
-      <GetStartedModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+      <GetStartedModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
         onSuccess={handleFormSuccess}
       />
     </>

@@ -1,148 +1,141 @@
-import { useEffect } from 'react'
-import { X } from 'lucide-react'
-import {
-  SiDjango,
-  SiReact,
-  SiPostgresql,
-  SiJsonwebtokens,
-  SiDocker,
-  SiFlask,
-  SiTensorflow,
-  SiPython,
-  SiPytorch,
-  SiScikitlearn,
-  SiNumpy,
-  SiPandas,
-  SiJavascript,
-  SiSupabase,
-  SiVercel,
-  SiStreamlit,
-  SiOpencv,
-  SiBootstrap,
-} from 'react-icons/si'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, X } from 'lucide-react'
+import { techIconMap } from './techIconMap'
 
-// Map technology names to their icons and colors
-const techIconMap = {
-  'Django': { icon: SiDjango, color: '#092E20' },
-  'React': { icon: SiReact, color: '#61DAFB' },
-  'PostgreSQL': { icon: SiPostgresql, color: '#4169E1' },
-  'JWT': { icon: SiJsonwebtokens, color: '#000000' },
-  'Docker': { icon: SiDocker, color: '#2496ED' },
-  'React Native': { icon: SiReact, color: '#61DAFB' },
-  'Flask': { icon: SiFlask, color: '#000000' },
-  'TensorFlow': { icon: SiTensorflow, color: '#FF6F00' },
-  'CNN': { icon: SiTensorflow, color: '#FF6F00' },
-  'Python': { icon: SiPython, color: '#3776AB' },
-  'PyTorch': { icon: SiPytorch, color: '#EE4C2C' },
-  'Scikit-learn': { icon: SiScikitlearn, color: '#F7931E' },
-  'NumPy': { icon: SiNumpy, color: '#013243' },
-  'Pandas': { icon: SiPandas, color: '#150458' },
-  'JavaScript': { icon: SiJavascript, color: '#F7DF1E' },
-  'Supabase': { icon: SiSupabase, color: '#3ECF8E' },
-  'Vercel': { icon: SiVercel, color: '#000000' },
-  'Streamlit': { icon: SiStreamlit, color: '#FF4B4B' },
-  'OpenCV': { icon: SiOpencv, color: '#5C3EE8' },
-  'Bootstrap': { icon: SiBootstrap, color: '#7952B3' },
-  'Ethereum': { icon: SiPython, color: '#3C3C3D' },
-  'SHA-256': { icon: SiPython, color: '#3C3C3D' },
-  'Data Analytics': { icon: SiPython, color: '#3776AB' },
-  'Research': { icon: SiPython, color: '#3776AB' },
-  'Data Analysis': { icon: SiPython, color: '#3776AB' },
-  'Economics': { icon: SiPython, color: '#3776AB' },
-  'SPSS': { icon: SiPython, color: '#3776AB' },
-  'Machine Learning': { icon: SiPython, color: '#3776AB' },
-  'Computer Vision': { icon: SiPython, color: '#3776AB' },
-  'NLP': { icon: SiPython, color: '#3776AB' },
-  'NLTK': { icon: SiPython, color: '#3776AB' },
-}
+// The inner modal mounts fresh for every project (key={project.id}),
+// so it fades in each time and needs no "reset" effect.
+function ModalContent({ project, onClose }) {
+  const [show, setShow] = useState(false)
+  const closeRef = useRef(onClose)
 
-export default function ProjectModal({ project, onClose }) {
+  // Keep the latest onClose without writing to the ref during render
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', handleEscape)
-    // Only prevent scroll when modal is open
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      // Restore scroll when modal closes
-      document.body.style.overflow = 'unset'
-    }
+    closeRef.current = onClose
   }, [onClose])
 
-  if (!project) return null
+  // Soft fade-in, Escape to close, lock page scroll only while open
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setShow(true))
+    const onKey = (e) => e.key === 'Escape' && closeRef.current()
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      cancelAnimationFrame(raf)
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [])
 
-  // Get tech icons with colors for modal
-  const techIcons = project.technologies.map(tech => {
-    const techData = techIconMap[tech]
-    return techData ? { ...techData, name: tech } : null
-  }).filter(Boolean)
+  const techs = project.technologies
+    .map((t) => (techIconMap[t] ? { ...techIconMap[t], name: t } : null))
+    .filter(Boolean)
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={onClose}>
-      <div 
-        className="relative w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden mx-4"
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={project.title}
+      onClick={onClose}
+      className={`fixed inset-0 z-[60] flex items-end justify-center bg-[#071E4D]/60 transition-opacity duration-300 sm:items-center sm:p-6 ${
+        show ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      <div
         onClick={(e) => e.stopPropagation()}
+        className={`relative flex max-h-[92dvh] w-full max-w-[880px] flex-col overflow-hidden rounded-t-[28px] bg-white font-['Libre_Baskerville',serif] shadow-[0_20px_60px_rgba(7,30,77,0.3)] transition-all duration-300 ease-out motion-reduce:transition-none sm:rounded-[28px] md:flex-row ${
+          show ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+        }`}
       >
+        {/* Close */}
         <button
+          type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+          aria-label="Close"
+          className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#091E4C] shadow-md transition-colors duration-300 hover:bg-[#D44B08] hover:text-white"
         >
-          <X className="w-5 h-5 text-[#1D2B49]" />
+          <X className="h-5 w-5" />
         </button>
 
-        <div className="p-6 md:p-8 max-h-[80vh] overflow-y-auto">
-          <span className="inline-flex px-3 py-1 text-xs font-medium text-[#1D2B49] bg-[#1D2B49]/10 rounded-full mb-4">
+        {/* Image */}
+        <div className="relative h-[210px] shrink-0 sm:h-[260px] md:h-auto md:w-[44%]">
+          <img
+            src={project.img}
+            alt={project.title}
+            onError={(e) => {
+              e.currentTarget.onerror = null
+              e.currentTarget.src = `https://picsum.photos/seed/project${project.id}/900/900`
+            }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#071E4D]/60 via-transparent to-transparent" />
+          <span className="absolute bottom-10 left-5 rounded-full bg-white px-3 py-1 text-[8px] font-bold uppercase leading-[16px] tracking-[0.16em] text-[#091E4C] md:bottom-5">
             {project.category}
           </span>
+        </div>
 
-          <h2 className="text-2xl font-bold text-[#1D2B49] mb-4">
+        {/* Content (curved top-right corner on mobile, same as the cards) */}
+        <div className="relative z-10 -mt-8 flex-1 overflow-y-auto rounded-tr-[50px] bg-white p-6 pt-8 md:mt-0 md:rounded-tr-none md:p-10">
+          <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-[#D94801]">
+            Project Overview
+          </span>
+
+          <h2 className="mt-2 text-[22px] font-bold leading-[1.2] text-[#091E4C] md:text-[28px]">
             {project.title}
           </h2>
 
-          <div className="mb-6">
-            <h4 className="text-sm font-semibold text-[#1D2B49]/60 uppercase tracking-wider mb-2">
-              Project Description
-            </h4>
-            <p className="text-[#1D2B49]/70 leading-relaxed">
+          <div className="mt-4 h-[3px] w-12 rounded-full bg-[#D44B08]" />
+
+          <div className="mt-6">
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.16em] text-black/60">Description</h4>
+            <p className="mt-2 text-[13px] font-medium italic leading-[22px] text-black/70">
               {project.description}
             </p>
           </div>
 
-          <div className="mb-8">
-            <h4 className="text-sm font-semibold text-[#1D2B49]/60 uppercase tracking-wider mb-3">
-              Technologies
-            </h4>
-            <div className="flex flex-wrap gap-3">
-              {techIcons.map((tech) => {
-                const Icon = tech.icon
+          <div className="mt-6">
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.16em] text-black/60">Technologies</h4>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {techs.map((t) => {
+                const Icon = t.icon
                 return (
-                  <div 
-                    key={tech.name}
-                    className="flex items-center gap-2 px-3 py-2 bg-gray-50 rounded-lg border border-gray-100"
+                  <span
+                    key={t.name}
+                    className="inline-flex items-center gap-2 rounded-full border border-[#091E4C]/15 bg-[#F5F5F5] px-3 py-1.5 text-[11px] font-medium text-[#091E4C]"
                   >
-                    <Icon className="text-base" style={{ color: tech.color }} size={16} />
-                    <span className="text-sm font-medium text-[#1D2B49]">{tech.name}</span>
-                  </div>
+                    <Icon size={14} style={{ color: t.color }} />
+                    {t.name}
+                  </span>
                 )
               })}
             </div>
           </div>
 
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#D94801] rounded-lg hover:bg-[#D94801]/90 transition-colors w-full"
-          >
-            View Project
-            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex h-[44px] flex-1 items-center justify-center gap-2 rounded-full bg-[#D44B08] text-[13px] font-semibold text-white transition-colors duration-300 hover:bg-[#B93F06] active:scale-[0.98]"
+            >
+              View Project
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <button
+              type="button"
+              onClick={onClose}
+              className="inline-flex h-[44px] items-center justify-center rounded-full border border-[#08214D] px-8 text-[13px] font-semibold text-[#08214D] transition-colors duration-300 hover:bg-[#08214D] hover:text-white active:scale-[0.98]"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
   )
+}
+
+export default function ProjectModal({ project, onClose }) {
+  if (!project) return null
+  return <ModalContent key={project.id} project={project} onClose={onClose} />
 }

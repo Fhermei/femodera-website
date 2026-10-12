@@ -1,141 +1,133 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Palette, BarChart3, BrainCircuit, Eye } from 'lucide-react'
-import {
-  SiPython,
-  SiDjango,
-  SiFastapi,
-  SiJavascript,
-  SiReact,
-  SiTailwindcss,
-  SiDocker,
-  SiGithub,
-  SiTensorflow,
-  SiPytorch,
-  SiFigma,
-} from 'react-icons/si'
+import { X } from 'lucide-react'
+import { FaWhatsapp } from 'react-icons/fa'
 import logo from '../assets/logo.png'
 
-// Tech icons with brand colors
-const techIcons = [
-  { name: 'Python', icon: SiPython, color: '#3776AB' },
-  { name: 'Django', icon: SiDjango, color: '#092E20' },
-  { name: 'FastAPI', icon: SiFastapi, color: '#009688' },
-  { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'React', icon: SiReact, color: '#61DAFB' },
-  { name: 'Tailwind', icon: SiTailwindcss, color: '#06B6D4' },
-  { name: 'Docker', icon: SiDocker, color: '#2496ED' },
-  { name: 'GitHub', icon: SiGithub, color: '#FFFFFF' },
-  { name: 'TensorFlow', icon: SiTensorflow, color: '#FF6F00' },
-  { name: 'PyTorch', icon: SiPytorch, color: '#EE4C2C' },
-  { name: 'Figma', icon: SiFigma, color: '#F24E1E' },
-  { name: 'React Native', icon: SiReact, color: '#61DAFB' },
-  { name: 'UI/UX', icon: Palette, color: '#F0ABFC' },
-  { name: 'Data Science', icon: BarChart3, color: '#38BDF8' },
-  { name: 'Machine Learning', icon: BrainCircuit, color: '#A78BFA' },
-  { name: 'Computer Vision', icon: Eye, color: '#34D399' },
+const links = [
+  { label: 'Our Services', href: '#services' },
+  { label: 'Our Projects', href: '#projects' },
+  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'About Us', href: '#about' },
+  { label: 'Contact Us', href: '#contact' },
 ]
+
+// literal class names so Tailwind can detect them
+const linkDelays = ['delay-[150ms]', 'delay-[200ms]', 'delay-[250ms]', 'delay-[300ms]', 'delay-[350ms]']
 
 export default function Navbar({ onGetStarted }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const t = setTimeout(() => setMounted(true), 50)
+    return () => clearTimeout(t)
   }, [])
 
+  // Lock page scroll while the mobile menu is open + close with Escape
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    const onKey = (e) => e.key === 'Escape' && setIsOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [isOpen])
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
-      {/* Tech Icons Bar - Fixed ABOVE navbar */}
-      <div className="w-full bg-[#1D2B49] py-2 overflow-hidden border-b border-white/10">
-        <div className="flex gap-10 whitespace-nowrap animate-scroll">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-10">
-              {techIcons.map((tech, idx) => {
-                const Icon = tech.icon
-                return (
-                  <span key={`${tech.name}-${idx}`} className="text-white/80 text-sm flex items-center gap-2">
-                    <Icon className="text-lg" style={{ color: tech.color }} size={18} />
-                    <span className="font-medium">{tech.name}</span>
-                  </span>
-                )
-              })}
-            </div>
-          ))}
+    <div
+      className={`fixed inset-x-0 top-0 z-50 px-4 pt-[20px] font-['Libre_Baskerville',serif] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none md:px-6 xl:px-0 ${
+        mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
+      }`}
+    >
+      <header
+        className={`mx-auto flex w-full max-w-[573px] flex-col overflow-hidden bg-[#FBFDFF] shadow-[0_0_5px_3px_rgba(160,160,160,0.1)] transition-all duration-500 ease-in-out md:h-auto md:max-w-[1292px] md:rounded-full ${
+          isOpen ? 'h-[calc(100dvh-40px)] rounded-[24px]' : 'h-[52px] rounded-full'
+        }`}
+      >
+        {/* Top row */}
+        <div className="flex h-[52px] shrink-0 items-center justify-between px-5 md:h-[60px] md:px-8 lg:h-[68px] lg:px-14 xl:h-[72px] xl:px-[130px]">
+          {/* Logo */}
+          <a href="#home" onClick={() => setIsOpen(false)} className="flex shrink-0 items-center">
+            <img
+              src={logo}
+              alt="Fera Digital Solutions"
+              className="h-[22.7px] w-[72px] object-contain md:h-[29px] md:w-[95px] lg:h-[36.89px] lg:w-[121.11px]"
+            />
+          </a>
+
+          {/* Desktop / tablet links */}
+          <nav className="hidden items-center gap-4 md:flex lg:gap-8 xl:gap-[50px]">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="relative whitespace-nowrap text-[11px] font-medium text-black/80 transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[#D44B08] after:transition-all after:duration-300 hover:text-[#D44B08] hover:after:w-full xl:text-[12px]"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop / tablet CTA */}
+          <button
+            onClick={onGetStarted}
+            className="group hidden h-[40px] w-[116px] shrink-0 items-center justify-center gap-[10px] rounded-full bg-[#D44B08] text-[11px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] active:translate-y-0 active:scale-[0.98] md:inline-flex lg:w-[137px] lg:text-[12px]"
+          >
+            <FaWhatsapp className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110" />
+            Contact us
+          </button>
+
+          {/* Mobile toggle: hamburger <-> X */}
+          <button
+            onClick={() => setIsOpen((v) => !v)}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isOpen}
+            className="flex h-8 w-8 items-center justify-center md:hidden"
+          >
+            {isOpen ? (
+              <X className="h-[18px] w-[18px] text-black" />
+            ) : (
+              <span className="flex h-[10.46px] w-[17px] flex-col justify-between">
+                <span className="h-[2px] w-full bg-black" />
+                <span className="h-[2px] w-full bg-black" />
+                <span className="h-[2px] w-full bg-black" />
+              </span>
+            )}
+          </button>
         </div>
-      </div>
 
-      {/* Navbar - Fixed */}
-      <header className={`w-full bg-white border-b border-gray-100 transition-shadow ${isScrolled ? 'shadow-sm' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo - Left */}
-            <a href="#" className="flex items-center gap-2 flex-shrink-0">
-              <img src={logo} alt="Fera Digital Solutions" className="h-10 w-auto" />
-            </a>
-
-            {/* Desktop Navigation - Center */}
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#services" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors">
-                Services
-              </a>
-              <a href="#projects" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors">
-                Projects
-              </a>
-              <a href="#about" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors">
-                About
-              </a>
-              <a href="#contact" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors">
-                Contact
-              </a>
-            </div>
-
-            {/* CTA Button - Right */}
-            <div className="hidden md:block flex-shrink-0">
-              <button
-                onClick={onGetStarted}
-                className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-[#D94801] rounded-lg hover:bg-[#D94801]/90 transition-colors"
-              >
-                Get Started
-              </button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-              aria-label="Toggle menu"
+        {/* Mobile menu content (same pill, expanded to fill the screen) */}
+        <div
+          className={`flex flex-1 flex-col px-[19px] pb-6 pt-4 transition-opacity duration-300 md:hidden ${
+            isOpen ? 'opacity-100' : 'pointer-events-none invisible opacity-0'
+          }`}
+        >
+          {links.map((l, i) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={() => setIsOpen(false)}
+              className={`border-b border-black/5 py-4 text-left text-[12px] font-medium text-black/80 transition-all duration-500 hover:pl-2 hover:text-[#D44B08] motion-reduce:transition-none ${
+                linkDelays[i]
+              } ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'}`}
             >
-              {isOpen ? <X className="w-6 h-6 text-[#1D2B49]" /> : <Menu className="w-6 h-6 text-[#1D2B49]" />}
-            </button>
-          </div>
+              {l.label}
+            </a>
+          ))}
 
-          {/* Mobile Menu */}
-          <div className={`md:hidden overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 py-4' : 'max-h-0'}`}>
-            <div className="flex flex-col space-y-3 border-t border-gray-100 pt-4">
-              <a href="#services" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors px-3 py-2">
-                Services
-              </a>
-              <a href="#projects" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors px-3 py-2">
-                Projects
-              </a>
-              <a href="#about" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors px-3 py-2">
-                About
-              </a>
-              <a href="#contact" className="text-sm font-medium text-[#1D2B49] hover:text-[#D94801] transition-colors px-3 py-2">
-                Contact
-              </a>
-              <button
-                onClick={onGetStarted}
-                className="inline-flex justify-center px-6 py-2.5 text-sm font-semibold text-white bg-[#D94801] rounded-lg hover:bg-[#D94801]/90 transition-colors mx-3"
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
+          <button
+            onClick={() => {
+              setIsOpen(false)
+              onGetStarted?.()
+            }}
+            className={`group mt-8 inline-flex h-[40px] w-full items-center justify-center gap-[10px] rounded-full bg-[#D44B08] text-[12px] font-semibold text-white transition-all duration-500 delay-[400ms] hover:bg-[#B93F06] active:scale-[0.98] ${
+              isOpen ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+            }`}
+          >
+            <FaWhatsapp className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110" />
+            Contact us
+          </button>
         </div>
       </header>
     </div>
