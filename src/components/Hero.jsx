@@ -58,7 +58,7 @@ export default function Hero({ onGetStarted }) {
       {/* Background image (covers navbar area + hero + timeline) */}
       <div className="bg-[url('/hero.png')] bg-cover bg-center bg-no-repeat">
         {/* Main content */}
-        <div className="flex flex-col items-center px-4 pb-[48px] pt-[130px] text-center md:px-8 md:pb-[64px] md:pt-[170px]">
+        <div className="flex min-h-[100svh] flex-col items-center justify-center px-4 pb-[48px] pt-[100px] text-center md:px-8 md:pb-[64px] md:pt-[140px] xl:min-h-0 xl:justify-start xl:pt-[170px]">
           {/* Badge */}
           <div className={reveal('delay-[100ms]')}>
             <span className="mb-[4px] mt-[10px] inline-flex items-center justify-center rounded-full bg-white px-[14px] text-[6px] font-bold uppercase leading-[20px] tracking-[0.16em] text-black md:px-[30px] md:text-[11px] md:leading-[38px] lg:text-[14px]">

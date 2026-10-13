@@ -63,7 +63,7 @@ export default function About({ onGetStarted }) {
     <section
       ref={sectionRef}
       id="services"
-      className="mt-[300px] bg-white px-4 pb-12 font-['Libre_Baskerville',serif] md:px-8 md:pb-16 xl:px-0"
+      className="mt-[100px] bg-white px-4 pb-12 font-['Libre_Baskerville',serif] md:px-8 md:pb-16 xl:px-0"
     >
       <div className="mx-auto flex w-full max-w-[573px] flex-col items-center md:max-w-[1236px] md:flex-row md:items-center">
         {/* LEFT: text */}

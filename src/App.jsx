@@ -4,8 +4,10 @@ import Hero from './components/Hero'
 import Services from './components/Services'
 import Projects from './components/Projects'
 import AllProjects from './components/AllProjects'
-import About from './components/About'
 import AboutUs from './components/AboutUs'
+import AcademicProcess from './components/AcademicProcess'
+import Testimonials from './components/Testimonials'
+import GlobalReach from './components/GlobalReach'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import GetStartedModal from './components/GetStartedModal'
@@ -119,6 +121,9 @@ export default function App() {
       <Services />
       <Projects />
       <AboutUs onGetStarted={() => setIsModalOpen(true)} />
+      <AcademicProcess onGetStarted={() => setIsModalOpen(true)} />
+      <Testimonials />
+      <GlobalReach onGetStarted={() => setIsModalOpen(true)} />
       <Contact onSuccess={handleFormSuccess} />
       <Footer />
       <GetStartedModal

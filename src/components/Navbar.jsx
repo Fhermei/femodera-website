@@ -36,13 +36,13 @@ export default function Navbar({ onGetStarted }) {
 
   return (
     <div
-      className={`fixed inset-x-0 top-0 z-50 px-4 pt-[20px] font-['Libre_Baskerville',serif] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none md:px-6 xl:px-0 ${
-        mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 font-['Libre_Baskerville',serif] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none md:px-6 xl:px-0 ${
+        isOpen ? 'px-0 pt-0 md:pt-[20px]' : 'px-4 pt-[20px]'
+      } ${mounted ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}
     >
       <header
         className={`mx-auto flex w-full max-w-[573px] flex-col overflow-hidden bg-[#FBFDFF] shadow-[0_0_5px_3px_rgba(160,160,160,0.1)] transition-all duration-500 ease-in-out md:h-auto md:max-w-[1292px] md:rounded-full ${
-          isOpen ? 'h-[calc(100dvh-40px)] rounded-[24px]' : 'h-[52px] rounded-full'
+          isOpen ? 'h-[100dvh] rounded-none' : 'h-[52px] rounded-full'
         }`}
       >
         {/* Top row */}
