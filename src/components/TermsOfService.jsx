@@ -1,150 +1,215 @@
-import { ArrowLeft } from 'lucide-react'
-import logo from '../assets/logo.png'
+import LegalLayout from './LegalLayout'
+
+// Change this date whenever you edit the terms
+const UPDATED = 'October 14, 2026'
+
+const sections = [
+  {
+    id: 'about',
+    title: 'About these terms',
+    blocks: [
+      'These terms are the agreement between you and Fera Digital Solutions (“Fera”, “we”, “us”), a research and technology lab based in Nigeria. They apply when you use our website or ask us to work on a project.',
+      'By using our website, sending us a project request or paying for our services, you confirm that you have read and accepted these terms. If you do not agree, please do not use our services. If you are using our services for a company or organisation, you confirm that you can accept these terms on its behalf.',
+    ],
+  },
+  {
+    id: 'services',
+    title: 'What we offer',
+    blocks: [
+      'We provide three kinds of service:',
+      {
+        list: [
+          { lead: 'Academic research and writing support.', text: 'Help with final year projects, PGD, Masters and PhD work, and journal articles, including research guidance, structuring, writing support, editing and referencing.' },
+          { lead: 'Data collection and analysis.', text: 'Data gathering, cleaning, statistical analysis and clear reporting of the results.' },
+          { lead: 'Software and web development.', text: 'Websites, web applications, mobile apps, systems and software implementation, including computer science project implementation.' },
+        ],
+      },
+      'The delivery times shown on our website (for example, 2 to 7 days for a final year project) are estimates. The actual time for your project is confirmed with you before work starts and depends on size, complexity and how quickly you give us what we need.',
+    ],
+  },
+  {
+    id: 'academic-integrity',
+    title: 'Academic work and integrity',
+    blocks: [
+      'Our academic services are a form of professional support, like tutoring, editing or consultancy. They are meant to help you understand, plan and produce your own research.',
+      {
+        list: [
+          'You are responsible for following your school, supervisor and examiner rules on how outside help may be used. Please check them before you order.',
+          'Work we deliver should be used as guidance, a model, a draft or learning material, and developed, understood and submitted properly by you.',
+          'We do not help with exams, tests or live assessments, impersonation, or falsified data or results.',
+          'We do not guarantee any grade, approval, publication or acceptance. Marks, supervisor decisions and journal outcomes are outside our control.',
+          'We may decline or stop any request that we believe breaks these rules, and we will tell you why.',
+        ],
+      },
+      {
+        note: 'We write every piece of academic work from scratch, with real sources that you can check. If you need a similarity (plagiarism) report, tell us at the start so we can plan for it.',
+      },
+    ],
+  },
+  {
+    id: 'starting',
+    title: 'Starting a project',
+    blocks: [
+      'To start, send us your request through the Get Started form, WhatsApp or email. We will reply with questions if needed, and then with a scope (what we will do), a price and a delivery time.',
+      'A project begins once you have confirmed the scope in writing (a WhatsApp or email message is enough) and paid any deposit. What we both agreed in that message is the project agreement. If it conflicts with these terms, the written project agreement comes first for that project.',
+    ],
+  },
+  {
+    id: 'your-part',
+    title: 'What we need from you',
+    blocks: [
+      {
+        list: [
+          'Give us accurate and complete information, and the materials we ask for, on time.',
+          'Reply to questions and give feedback within a reasonable time. If you are slow to respond, the delivery date moves back by the same amount.',
+          'Tell us about changes as early as you can. Changes to the agreed scope may change the price and the delivery time, and we will agree this with you before we continue.',
+          'Make sure you have the right to share everything you send us, including any data about other people.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'payment',
+    title: 'Prices and payment',
+    blocks: [
+      {
+        list: [
+          { lead: 'Prices.', text: 'We quote a price for each project before it starts. Prices are in Nigerian naira unless we agree otherwise, and the price does not change unless the scope changes.' },
+          { lead: 'Deposit.', text: 'We may ask for a deposit before we start. This reserves our time and covers the first stage of the work.' },
+          { lead: 'Balance.', text: 'The remaining balance is due as agreed in the quote, and in any case before we hand over the final files, source code or access.' },
+          { lead: 'Late payment.', text: 'If a payment is late, we may pause work until it is made. Pausing may move the delivery date.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'delivery',
+    title: 'Delivery and revisions',
+    blocks: [
+      'We deliver by email, WhatsApp, a shared folder or another method we agree with you. Please check what we deliver soon after you receive it.',
+      'Your price includes reasonable revisions that stay within the agreed scope. Please send revision requests within 7 days of delivery, unless we agreed another period. New requirements, a change of topic or direction, or large changes after sign-off count as new work and may be charged.',
+    ],
+  },
+  {
+    id: 'refunds',
+    title: 'Cancellations and refunds',
+    blocks: [
+      {
+        list: [
+          { lead: 'Before work starts:', text: 'you can cancel and we will refund your deposit in full, less any payment fees.' },
+          { lead: 'After work has started:', text: 'you can cancel at any time. We will refund the part of your payment that does not cover the work already done and costs already spent, and we will give you a fair account of both.' },
+          { lead: 'After delivery:', text: 'payments are not refundable, because the work has been done. The exception is where we did not deliver what we agreed and could not fix it after a fair chance to do so. In that case we will refund the affected part.' },
+        ],
+      },
+      'Refunds are paid within a reasonable time using the same method as your payment, wherever possible.',
+    ],
+  },
+  {
+    id: 'ownership',
+    title: 'Who owns the work',
+    blocks: [
+      {
+        list: [
+          { lead: 'Your materials.', text: 'You keep ownership of everything you give us, including your ideas, data and content.' },
+          { lead: 'Finished work.', text: 'When you have paid in full, the final deliverables made specially for you belong to you (or you receive a full licence to use them), and you can use them for the purpose they were made for.' },
+          { lead: 'Our tools.', text: 'We keep ownership of our own pre-existing tools, templates, code libraries, methods and know-how, and of any open-source or third-party components. You may use them as part of your deliverable under their own licences.' },
+          { lead: 'Portfolio.', text: 'We may mention a completed software or web project in our portfolio. We will only do this with your permission, and never for confidential academic work.' },
+          { lead: 'Our website.', text: 'The text, design, logos and images on our website belong to Fera. Please do not copy them without our written permission.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'confidentiality',
+    title: 'Confidentiality',
+    blocks: [
+      'We keep your project details, files, data and business information confidential. We share them only with people who need them to deliver your project and who agree to keep them confidential, or where the law requires it.',
+      'This duty continues after the project ends. It does not apply to information that is already public or that you make public yourself. How we handle your personal information is explained in our Privacy Policy.',
+    ],
+  },
+  {
+    id: 'acceptable-use',
+    title: 'Acceptable use',
+    blocks: [
+      'When you use our website or services, please do not:',
+      {
+        list: [
+          'Use them for anything unlawful, fraudulent or harmful, or ask us to produce content that is.',
+          'Send us material you do not have the right to share, or that contains malware.',
+          'Try to break into, overload or interfere with our website or systems.',
+          'Pretend to be someone else, or give us false information.',
+          'Abuse, threaten or harass our team.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'third-parties',
+    title: 'Third-party services',
+    blocks: [
+      'Some projects use third-party services, such as hosting, domain names, payment gateways, app stores, APIs and open-source libraries. These have their own terms, prices and availability. We will tell you about them where they affect your project, but we do not control them and are not responsible for their changes or outages.',
+      'Costs for these services (for example, hosting or domain renewals) are separate from our fee unless the quote says otherwise.',
+    ],
+  },
+  {
+    id: 'no-guarantees',
+    title: 'What we cannot promise',
+    blocks: [
+      'We work carefully and aim for high quality, but we cannot promise particular results. In particular, we do not guarantee academic grades, approvals, publication, business results, or that software will work without any errors or interruptions in every environment.',
+      'Our website and any free information on it are provided “as is”, without warranties of any kind, to the extent the law allows.',
+    ],
+  },
+  {
+    id: 'liability',
+    title: 'Limits on our liability',
+    blocks: [
+      'To the extent the law allows, Fera is not responsible for indirect or consequential losses, such as lost profits, lost opportunities or lost data, that come from using our services.',
+      'Our total responsibility to you for any claim connected to a project is limited to the amount you paid us for that project. Nothing in these terms limits any responsibility that cannot legally be limited.',
+      'You agree to cover losses and claims that Fera suffers because you gave us material you had no right to share, or because you broke these terms or the law.',
+    ],
+  },
+  {
+    id: 'ending',
+    title: 'Ending our services',
+    blocks: [
+      'You can stop using our services at any time, and cancellation and refunds work as described above. We may pause or end a project, or refuse a request, if you break these terms, do not pay, ask for something unlawful or unethical, or treat our team badly. Where we end a project for a reason that is not your fault, we will refund the part of your payment that does not cover the work already done.',
+      'Sections that need to continue after the project ends (such as ownership, confidentiality and liability) will continue.',
+    ],
+  },
+  {
+    id: 'law',
+    title: 'Governing law and disputes',
+    blocks: [
+      'These terms are governed by the laws of the Federal Republic of Nigeria.',
+      'If there is a problem, please contact us first at femoderalab@gmail.com. Most issues can be solved by talking. If we cannot reach an agreement, either of us may take the matter to the courts of competent jurisdiction in Nigeria.',
+    ],
+  },
+  {
+    id: 'changes',
+    title: 'Changes to these terms',
+    blocks: [
+      'We may update these terms from time to time. The “Last updated” date at the top shows when. New terms apply to new projects and to your use of the website after the change. A project already in progress stays under the terms that were in place when it started, unless we both agree otherwise.',
+    ],
+  },
+  {
+    id: 'contact',
+    title: 'Contact us',
+    blocks: [
+      'Fera Digital Solutions, Nigeria.',
+      { list: [{ lead: 'Email:', text: 'femoderalab@gmail.com' }, { lead: 'Phone / WhatsApp:', text: '+234 810 610 8753' }] },
+    ],
+  },
+]
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Simple Header with Back Button */}
-      <div className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <a href="#" className="flex items-center gap-2">
-              <img src={logo} alt="Fera Digital Solutions" className="h-10 w-auto" />
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1D2B49] border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#1D2B49] mb-2">Terms of Service</h1>
-        <p className="text-[#1D2B49]/60 text-sm mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-
-        <div className="space-y-6 text-[#1D2B49]/80 leading-relaxed">
-          <p>
-            Welcome to Fera Digital Solutions. By using our website and services, you agree to comply with and be bound by the following terms and conditions. Please read these Terms of Service carefully before using our services. If you do not agree to these terms, please do not use our website or services.
-          </p>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">1. Acceptance of Terms</h2>
-            <p>
-              By accessing or using the Fera Digital Solutions website and services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you are using our services on behalf of an organization, you represent that you have the authority to bind that organization to these terms.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">2. Description of Services</h2>
-            <p>
-              Fera Digital Solutions provides software development, AI/ML solutions, data science, academic research support, UI/UX design, and related technology services. We reserve the right to modify, suspend, or discontinue any aspect of our services at any time without prior notice.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">3. User Responsibilities</h2>
-            <p className="mb-2">When using our services, you agree to:</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Provide accurate and complete information when engaging our services</li>
-              <li>Maintain the confidentiality of any project-related information</li>
-              <li>Use our services in compliance with all applicable laws and regulations</li>
-              <li>Not use our services for any unlawful or fraudulent purpose</li>
-              <li>Not interfere with or disrupt the operation of our website or services</li>
-              <li>Not attempt to gain unauthorized access to any part of our systems</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">4. Intellectual Property</h2>
-            <p className="mb-2">All content on our website, including text, graphics, logos, and software, is the property of Fera Digital Solutions and is protected by copyright and intellectual property laws.</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong>Our Work:</strong> The code, designs, and deliverables we create for you are licensed to you upon full payment, subject to the terms of our project agreement.</li>
-              <li><strong>Your Content:</strong> You retain ownership of any content, data, or materials you provide to us for the purpose of delivering our services.</li>
-              <li><strong>Third-Party Rights:</strong> We respect intellectual property rights. If you believe any content on our site infringes your rights, please contact us.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">5. Project Engagement and Payment</h2>
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong>Project Scope:</strong> All projects will be defined with a clear scope of work, deliverables, and timeline agreed upon before commencement.</li>
-              <li><strong>Payment Terms:</strong> Payment terms will be specified in the project agreement. We may require a deposit before commencing work.</li>
-              <li><strong>Changes:</strong> Any changes to the project scope may result in additional costs and timeline adjustments.</li>
-              <li><strong>Revisions:</strong> Revisions are included as specified in the project agreement. Additional revisions may incur extra charges.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">6. Confidentiality</h2>
-            <p>
-              We treat your project information and business details as confidential. We will not share your proprietary information with third parties without your consent, except as required by law or as necessary to deliver our services.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">7. Limitations of Liability</h2>
-            <p>
-              To the maximum extent permitted by law, Fera Digital Solutions shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from:
-            </p>
-            <ul className="list-disc pl-6 space-y-1 mt-2">
-              <li>Your use or inability to use our services</li>
-              <li>Any conduct or content of any third party on our site</li>
-              <li>Unauthorized access, use, or alteration of your transmissions or content</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">8. Disclaimer of Warranties</h2>
-            <p>
-              Our services are provided "as is" and "as available" without any warranties of any kind, either express or implied. We do not warrant that our services will be uninterrupted, error-free, or secure. We do not warrant the accuracy, completeness, or reliability of any content provided through our services.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">9. Indemnification</h2>
-            <p>
-              You agree to indemnify, defend, and hold harmless Fera Digital Solutions and its employees, contractors, and affiliates from any claims, damages, losses, liabilities, and expenses arising from your use of our services or your violation of these terms.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">10. Termination</h2>
-            <p>
-              We may terminate or suspend your access to our services immediately, without prior notice or liability, for any reason, including without limitation if you breach these terms. Upon termination, your right to use our services will immediately cease.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">11. Governing Law</h2>
-            <p>
-              These Terms of Service shall be governed by and construed in accordance with the laws of Nigeria. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts of Nigeria.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">12. Changes to Terms</h2>
-            <p>
-              We reserve the right to update or modify these Terms of Service at any time without prior notice. Your continued use of our services after any changes constitutes acceptance of the new terms. We encourage you to review these terms periodically.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">13. Contact Information</h2>
-            <p>
-              If you have any questions about these Terms of Service, please contact us at:
-            </p>
-            <div className="mt-2 text-[#1D2B49]/60">
-              <p>Email: femoderalab@gmail.com</p>
-              <p>Phone: +234 810 610 8753</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <LegalLayout
+      label="Legal"
+      title="Terms of Service"
+      updated={UPDATED}
+      intro="These terms explain how working with Fera Digital Solutions works: what we offer, what we expect, how payment, revisions and refunds work, and who owns the finished work. We have kept them short and clear."
+      sections={sections}
+      other={{ label: 'Privacy Policy', hash: 'privacy' }}
+    />
   )
 }

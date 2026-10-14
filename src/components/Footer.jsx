@@ -41,56 +41,67 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-[#1D2B49] font-['Libre_Baskerville',serif] text-white">
-      <div className="mx-auto w-full max-w-[573px] px-4 py-12 md:max-w-[1292px] md:px-6 md:py-16 xl:px-0">
-        {/* Logo + social icons */}
-        <div className="flex flex-col items-center gap-8">
-          <a href="#home" aria-label="Fera Digital Solutions">
-            <img
-              src="/footer.png"
-              alt="Fera Digital Solutions"
-              className="h-[34px] w-auto object-contain md:h-[44px]"
-            />
-          </a>
-
-          <ul className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-            {socials.map(({ label, href, Icon }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target={href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  title={label}
-                  className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#D44B08] hover:text-white active:scale-95 md:h-[44px] md:w-[44px]"
-                >
-                  <Icon className="h-[16px] w-[16px] md:h-[18px] md:w-[18px]" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Bottom bar: copyright + Privacy / Terms */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-[11px] md:flex-row md:text-[12px]">
-          <p className="text-white/50">© {new Date().getFullYear()} Fera Digital Solutions</p>
-
-          <div className="flex items-center gap-4">
+    <footer className="w-full bg-[#1D2B49] font-['Libre_Baskerville',serif] text-white">
+      {/* Max width wrapper: stays centred and stops growing at 1440px when zoomed out */}
+      <div className="mx-auto w-full max-w-[1440px]">
+        <div className="mx-auto w-full max-w-[573px] px-4 py-12 pb-[max(2rem,env(safe-area-inset-bottom))] md:max-w-[1292px] md:px-6 md:py-16 xl:px-0">
+          {/* Logo + social icons */}
+          <div className="flex flex-col items-center gap-7 md:gap-8">
             <a
-              href="#privacy"
-              onClick={goTo('privacy')}
-              className="text-white/50 transition-colors hover:text-white"
+              href="#home"
+              aria-label="Fera Digital Solutions"
+              className="rounded-md outline-none focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-4 focus-visible:ring-offset-[#1D2B49]"
             >
-              Privacy Policy
+              <img
+                src="/footer.png"
+                alt="Fera Digital Solutions"
+                className="h-[38px] w-auto object-contain md:h-[46px]"
+              />
             </a>
-            <span className="text-white/20">|</span>
-            <a
-              href="#terms"
-              onClick={goTo('terms')}
-              className="text-white/50 transition-colors hover:text-white"
-            >
-              Terms of Service
-            </a>
+
+            <ul className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+              {socials.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target={href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    title={label}
+                    className="flex h-[46px] w-[46px] items-center justify-center rounded-full bg-white/10 text-white/80 outline-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#D44B08] hover:text-white focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-2 focus-visible:ring-offset-[#1D2B49] active:scale-95 md:h-[48px] md:w-[48px]"
+                  >
+                    <Icon className="h-[18px] w-[18px] md:h-[19px] md:w-[19px]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Bottom bar: copyright + Privacy / Terms */}
+          <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-white/15 pt-6 text-[13px] md:mt-12 md:flex-row md:gap-3 md:text-[13px]">
+            <div className="flex items-center gap-1 md:order-2">
+              <a
+                href="#privacy"
+                onClick={goTo('privacy')}
+                className="flex min-h-[44px] items-center rounded-md px-3 text-white/60 outline-none transition-colors hover:text-white focus-visible:text-white focus-visible:ring-2 focus-visible:ring-[#D44B08]"
+              >
+                Privacy Policy
+              </a>
+              <span aria-hidden="true" className="text-white/20">
+                |
+              </span>
+              <a
+                href="#terms"
+                onClick={goTo('terms')}
+                className="flex min-h-[44px] items-center rounded-md px-3 text-white/60 outline-none transition-colors hover:text-white focus-visible:text-white focus-visible:ring-2 focus-visible:ring-[#D44B08]"
+              >
+                Terms of Service
+              </a>
+            </div>
+
+            <p className="text-white/50 md:order-1">
+              © {new Date().getFullYear()} Fera Digital Solutions
+            </p>
           </div>
         </div>
       </div>

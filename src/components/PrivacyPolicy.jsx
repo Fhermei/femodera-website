@@ -1,138 +1,209 @@
-import { ArrowLeft } from 'lucide-react'
-import logo from '../assets/logo.png'
+import LegalLayout from './LegalLayout'
+
+// Change this date whenever you edit the policy
+const UPDATED = 'October 14, 2026'
+
+const sections = [
+  {
+    id: 'who-we-are',
+    title: 'Who we are',
+    blocks: [
+      'Fera Digital Solutions (“Fera”, “we”, “us”) is a research and technology lab based in Nigeria. We provide academic research and writing support, data collection and analysis, and software and web development for students, researchers, businesses and institutions.',
+      'For the information described in this policy, we are the data controller. That means we decide why and how your information is used, and we are responsible for looking after it.',
+    ],
+  },
+  {
+    id: 'what-we-collect',
+    title: 'Information we collect',
+    blocks: [
+      'We only collect what we need to talk to you and do the work you ask for. This includes:',
+      {
+        list: [
+          {
+            lead: 'Contact details.',
+            text: 'Your name, email address and phone number, when you fill in our Get Started or Contact form, or message us on WhatsApp, email or social media. Your phone number is optional on our forms.',
+          },
+          {
+            lead: 'Your messages.',
+            text: 'What you tell us about your project, such as your topic, goals, deadlines and budget.',
+          },
+          {
+            lead: 'Project materials.',
+            text: 'Files and information you send so we can do the work, for example research proposals, chapters, questionnaires, datasets, source code, designs or website content.',
+          },
+          {
+            lead: 'Communication records.',
+            text: 'Our emails, WhatsApp chats and calls with you about your project, including agreements and payment confirmations.',
+          },
+          {
+            lead: 'Technical data.',
+            text: 'Basic information your browser sends automatically, such as device type, browser, approximate location from your IP address and the pages you visit. Our hosting provider collects this to keep the site secure and running.',
+          },
+        ],
+      },
+      {
+        note: 'This website does not take payments or store card details. We do not ask for sensitive personal data (such as health, religious or biometric data) unless your project truly needs it, and only after we have agreed it with you.',
+      },
+    ],
+  },
+  {
+    id: 'how-we-use',
+    title: 'How we use your information',
+    blocks: [
+      {
+        list: [
+          'To reply to your enquiries and prepare quotes and project plans.',
+          'To carry out your project and deliver the finished work.',
+          'To keep you updated on progress, timelines, revisions and delivery.',
+          'To handle agreements, payments and records of our work together.',
+          'To protect our website and prevent spam or abuse.',
+          'To improve our services and this website.',
+          'To meet our legal obligations.',
+        ],
+      },
+      'We do not use your information to make automated decisions about you, and we do not sell it.',
+    ],
+  },
+  {
+    id: 'legal-basis',
+    title: 'Our lawful reasons',
+    blocks: [
+      'Under the Nigeria Data Protection Act 2023, we need a lawful reason to use your information. We rely on:',
+      {
+        list: [
+          { lead: 'Your consent,', text: 'when you send us a form or message and ask us to contact you. You can withdraw it at any time.' },
+          { lead: 'Contract,', text: 'when we need your information to start or carry out a project you asked for.' },
+          { lead: 'Legitimate interests,', text: 'such as keeping our site secure and keeping records of our work, where this does not override your rights.' },
+          { lead: 'Legal obligation,', text: 'where the law requires us to keep or share information.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'other-peoples-data',
+    title: 'Data about other people',
+    blocks: [
+      'Some projects involve information about other people, for example survey responses, interview records or customer data in a system we are building.',
+      {
+        list: [
+          'You are responsible for having permission to share that information with us, and for explaining to those people how it will be used.',
+          'Please remove names and other identifying details before sending data, wherever you can. We are happy to advise on how.',
+          'We use this data only to do your project, we keep it confidential, and we handle it on your instructions.',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'sharing',
+    title: 'Who we share it with',
+    blocks: [
+      'We do not sell or rent your personal information. We share it only where needed:',
+      {
+        list: [
+          { lead: 'Service providers.', text: 'Tools that help us run the business: Formspree (to receive the messages you send through our website forms), Gmail and WhatsApp (to communicate with you), and our website hosting provider. They may only use your information to provide their service to us.' },
+          { lead: 'Collaborators.', text: 'On larger projects we may work with trusted specialists. They are bound to keep your information confidential, and we only share what they need.' },
+          { lead: 'Legal and safety.', text: 'Where the law requires it, or to protect our rights, our clients or others from fraud or harm.' },
+          { lead: 'Business changes.', text: 'If Fera is ever sold or restructured, your information may move to the new owner, who must respect this policy.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'transfers',
+    title: 'Transfers outside Nigeria',
+    blocks: [
+      'Some of the tools above store information on servers outside Nigeria, for example in the United States or Europe. When this happens, we choose providers with recognised security practices and take reasonable steps to make sure your information is protected to a similar standard.',
+    ],
+  },
+  {
+    id: 'retention',
+    title: 'How long we keep it',
+    blocks: [
+      {
+        list: [
+          { lead: 'Enquiries that do not become projects:', text: 'up to 12 months, then deleted.' },
+          { lead: 'Project files and records:', text: 'for up to 12 months after the project is completed, so we can support you with follow-up questions and revisions. After that we delete or anonymise them.' },
+          { lead: 'Financial and legal records:', text: 'for as long as the law requires.' },
+        ],
+      },
+      'You can ask us to delete your information earlier at any time (see “Your rights”).',
+    ],
+  },
+  {
+    id: 'security',
+    title: 'Keeping your information safe',
+    blocks: [
+      'We use sensible technical and organisational measures to protect your information, such as password-protected accounts, limited access to project files and secure connections (HTTPS) on our website.',
+      'No system is completely secure, so we cannot promise absolute security. If a breach affecting your information ever happens, we will tell you and the authorities where the law requires.',
+    ],
+  },
+  {
+    id: 'your-rights',
+    title: 'Your rights',
+    blocks: [
+      'The Nigeria Data Protection Act gives you rights over your information. You can ask us to:',
+      {
+        list: [
+          'Tell you what information we hold about you and give you a copy.',
+          'Correct information that is wrong or out of date.',
+          'Delete your information, where we have no legal reason to keep it.',
+          'Stop or limit how we use it, or object to a particular use.',
+          'Give you your information in a common, portable format.',
+          'Stop contacting you, by withdrawing your consent.',
+        ],
+      },
+      'To use any of these rights, email us at femoderalab@gmail.com. We will reply within a reasonable time, and we may need to confirm who you are first.',
+      'If you are not happy with how we handle your information, you also have the right to complain to the Nigeria Data Protection Commission (NDPC).',
+    ],
+  },
+  {
+    id: 'cookies',
+    title: 'Cookies',
+    blocks: [
+      'Our website does not use advertising cookies. Your browser and our hosting provider may use small files or logs that are needed to deliver the site and keep it secure. You can block or delete cookies in your browser settings, and the website will still work.',
+      'If we add analytics or other tools in future, we will update this section.',
+    ],
+  },
+  {
+    id: 'links',
+    title: 'Links to other sites',
+    blocks: [
+      'Our website links to our pages on TikTok, Instagram, Facebook, X and WhatsApp, and to other sites. Once you leave our website, those services have their own privacy practices, and we are not responsible for them.',
+    ],
+  },
+  {
+    id: 'children',
+    title: 'Young people',
+    blocks: [
+      'Our services are meant for people aged 18 and over. If you are under 18, please ask a parent or guardian to contact us for you. If we learn that we have collected information from someone under 18 without a parent or guardian’s permission, we will delete it.',
+    ],
+  },
+  {
+    id: 'changes',
+    title: 'Changes to this policy',
+    blocks: [
+      'We may update this policy from time to time. When we do, we will change the “Last updated” date at the top of this page. If the changes are important, we will also tell you by email or on our website.',
+    ],
+  },
+  {
+    id: 'contact',
+    title: 'Contact us',
+    blocks: [
+      'Fera Digital Solutions, Nigeria.',
+      { list: [{ lead: 'Email:', text: 'femoderalab@gmail.com' }, { lead: 'Phone / WhatsApp:', text: '+234 810 610 8753' }] },
+    ],
+  },
+]
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Simple Header with Back Button */}
-      <div className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <a href="#" className="flex items-center gap-2">
-              <img src={logo} alt="Fera Digital Solutions" className="h-10 w-auto" />
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#1D2B49] border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#1D2B49] mb-2">Privacy Policy</h1>
-        <p className="text-[#1D2B49]/60 text-sm mb-8">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-
-        <div className="space-y-6 text-[#1D2B49]/80 leading-relaxed">
-          <p>
-            At Fera Digital Solutions, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site or use our services.
-          </p>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">1. Information We Collect</h2>
-            <p className="mb-2">We may collect the following types of information:</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong>Personal Identification Information:</strong> Name, email address, phone number, and any other information you voluntarily provide to us through contact forms, project inquiries, or email communications.</li>
-              <li><strong>Project Information:</strong> Details about your project requirements, academic research needs, or technical specifications you share with us.</li>
-              <li><strong>Usage Data:</strong> Information about how you interact with our website, including pages visited, time spent, and referral sources.</li>
-              <li><strong>Device Information:</strong> Browser type, operating system, IP address, and device type.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">2. How We Use Your Information</h2>
-            <p className="mb-2">We use the information we collect for the following purposes:</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li>To provide, maintain, and improve our services</li>
-              <li>To respond to your inquiries, questions, and project requests</li>
-              <li>To process project submissions and deliver completed work</li>
-              <li>To send you updates, project confirmations, and service-related communications</li>
-              <li>To understand how users interact with our website and improve user experience</li>
-              <li>To comply with legal obligations and enforce our terms of service</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">3. Information Sharing and Disclosure</h2>
-            <p className="mb-2">We do not sell, trade, or rent your personal information to third parties. We may share your information in the following circumstances:</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website, conducting business, or serving you, provided they agree to keep this information confidential.</li>
-              <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities.</li>
-              <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or asset sale, your personal information may be transferred to the new entity.</li>
-              <li><strong>With Your Consent:</strong> We may share your information with your explicit consent.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">4. Data Security</h2>
-            <p>
-              We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">5. Data Retention</h2>
-            <p>
-              We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When we no longer need your personal information, we will securely delete or anonymize it.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">6. Your Rights</h2>
-            <p className="mb-2">You have the following rights regarding your personal information:</p>
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong>Access:</strong> You may request access to the personal information we hold about you.</li>
-              <li><strong>Correction:</strong> You may request that we correct inaccurate or incomplete information.</li>
-              <li><strong>Deletion:</strong> You may request that we delete your personal information, subject to legal obligations.</li>
-              <li><strong>Restriction:</strong> You may request that we restrict processing of your personal information.</li>
-              <li><strong>Portability:</strong> You may request a copy of your data in a structured, machine-readable format.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">7. Cookies and Tracking Technologies</h2>
-            <p>
-              We use cookies and similar tracking technologies to enhance your experience on our website. Cookies are small data files stored on your device that help us understand how you use our site. You can set your browser to refuse all cookies or to indicate when a cookie is being sent. However, some features of the site may not function properly without cookies.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">8. Third-Party Links</h2>
-            <p>
-              Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of such websites. We encourage you to review the privacy policies of any third-party sites you visit.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">9. Children's Privacy</h2>
-            <p>
-              Our services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us, and we will take steps to remove such information.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">10. Changes to This Privacy Policy</h2>
-            <p>
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-xl font-semibold text-[#1D2B49] mb-3">11. Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please contact us at:
-            </p>
-            <div className="mt-2 text-[#1D2B49]/60">
-              <p>Email: femoderalab@gmail.com</p>
-              <p>Phone: +234 810 610 8753</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <LegalLayout
+      label="Legal"
+      title="Privacy Policy"
+      updated={UPDATED}
+      intro="This policy explains what personal information we collect when you visit our website, request a project or talk to us, how we use it, and the choices you have. We have kept the language plain, so you can see exactly what happens to your information."
+      sections={sections}
+      other={{ label: 'Terms of Service', hash: 'terms' }}
+    />
   )
 }

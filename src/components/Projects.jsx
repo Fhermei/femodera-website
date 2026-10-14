@@ -27,6 +27,7 @@ export default function Projects() {
   }, [])
 
   const filtered = useMemo(() => filterProjects(projects, active, query), [active, query])
+  const shown = filtered.slice(0, HOME_COUNT)
 
   const reveal = (delay) =>
     `transition-all duration-700 ease-out motion-reduce:transition-none ${delay} ${
@@ -37,13 +38,13 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projects"
-      className="bg-white px-4 pb-16 pt-[80px] font-['Libre_Baskerville',serif] md:px-8 md:pb-24 md:pt-[110px] xl:px-0"
+      className="bg-white px-4 pb-16 pt-[72px] font-['Libre_Baskerville',serif] md:px-8 md:pb-24 md:pt-[110px] xl:px-0"
     >
       <div className="mx-auto w-full max-w-[573px] md:max-w-[1292px]">
-        {/* Header: 33px gap between the three on desktop */}
-        <div className="mx-auto flex flex-col items-center gap-[14px] text-center md:gap-[33px]">
+        {/* Header */}
+        <div className="mx-auto flex flex-col items-center gap-3 text-center md:gap-[28px] lg:gap-[33px]">
           <span
-            className={`text-[8px] font-normal uppercase leading-[20px] tracking-[0.16em] text-[#D94801] md:text-[12px] md:font-bold md:leading-[38px] lg:text-[16px] ${reveal(
+            className={`text-[11px] font-normal uppercase leading-[20px] tracking-[0.16em] text-[#D94801] md:text-[12px] md:font-bold md:leading-[30px] lg:text-[16px] ${reveal(
               'delay-[100ms]'
             )}`}
           >
@@ -52,7 +53,7 @@ export default function Projects() {
           </span>
 
           <h2
-            className={`text-[22px] font-bold leading-[1.2] text-[#091E4C] md:text-[34px] lg:text-[48px] ${reveal(
+            className={`text-[28px] font-bold leading-[1.2] text-[#091E4C] md:text-[38px] lg:text-[48px] ${reveal(
               'delay-[200ms]'
             )}`}
           >
@@ -61,7 +62,7 @@ export default function Projects() {
           </h2>
 
           <p
-            className={`max-w-[330px] text-[11px] font-normal leading-[16px] text-black/70 md:max-w-[560px] md:text-[14px] md:leading-[22px] lg:max-w-[660px] lg:text-[18px] lg:leading-[28px] ${reveal(
+            className={`max-w-[340px] text-[14px] font-normal leading-[22px] text-black/70 md:max-w-[560px] md:text-[15px] md:leading-[24px] lg:max-w-[660px] lg:text-[18px] lg:leading-[28px] ${reveal(
               'delay-[300ms]'
             )}`}
           >
@@ -72,7 +73,7 @@ export default function Projects() {
 
         {/* Body */}
         <div
-          className={`mt-[32px] flex flex-col gap-6 md:mt-[56px] lg:flex-row lg:items-start lg:justify-between ${reveal(
+          className={`mt-8 flex flex-col gap-6 md:mt-[56px] lg:flex-row lg:items-start lg:justify-between ${reveal(
             'delay-[450ms]'
           )}`}
         >
@@ -109,9 +110,12 @@ export default function Projects() {
               setQuery={setQuery}
             />
 
-            {/* Cards: 1 per row on mobile, 2 per row on iPad + desktop, 16px gap */}
-            <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2" aria-live="polite">
-              {filtered.slice(0, HOME_COUNT).map((project, index) => (
+            {/* Cards: 1 per row on mobile, 2 per row on iPad + desktop */}
+            <div
+              className="mt-5 grid grid-cols-1 gap-4 md:mt-6 md:grid-cols-2 md:gap-5"
+              aria-live="polite"
+            >
+              {shown.map((project, index) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
@@ -125,7 +129,7 @@ export default function Projects() {
             {/* Empty state */}
             {filtered.length === 0 && (
               <div className="mt-10 flex flex-col items-center gap-4 text-center">
-                <p className="text-[12px] italic text-black/60 md:text-[14px]">
+                <p className="text-[14px] italic leading-[22px] text-black/60 md:text-[15px]">
                   No projects match your search.
                 </p>
                 <button
@@ -134,23 +138,29 @@ export default function Projects() {
                     setActive('All')
                     setQuery('')
                   }}
-                  className="inline-flex h-[36px] items-center justify-center rounded-full border border-[#08214D] px-6 text-[12px] font-semibold text-[#08214D] transition hover:bg-[#08214D] hover:text-white"
+                  className="inline-flex h-[44px] items-center justify-center rounded-full border border-[#08214D] px-7 text-[13px] font-semibold text-[#08214D] outline-none transition hover:bg-[#08214D] hover:text-white focus-visible:ring-2 focus-visible:ring-[#08214D] focus-visible:ring-offset-2 active:scale-[0.98]"
                 >
                   Clear filters
                 </button>
               </div>
             )}
 
-            {/* Load more -> opens the full projects page */}
-            {filtered.length > HOME_COUNT && (
-              <div className="mt-10 flex justify-center">
-                <a
-                  href="#projects-all"
-                  className="group inline-flex h-[40px] w-[137px] items-center justify-center gap-1 rounded-full bg-[#D44B08] text-[12px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] active:translate-y-0 active:scale-[0.98]"
-                >
-                  Load more
-                  <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+            {/* Count + Load more -> opens the full projects page */}
+            {filtered.length > 0 && (
+              <div className="mt-8 flex flex-col items-center gap-4 md:mt-10">
+                <p className="text-[12px] text-black/50 md:text-[13px]">
+                  Showing {shown.length} of {filtered.length} projects
+                </p>
+
+                {filtered.length > HOME_COUNT && (
+                  <a
+                    href="#projects-all"
+                    className="group inline-flex h-[46px] items-center justify-center gap-2 rounded-full bg-[#D44B08] px-8 text-[13px] font-semibold text-white outline-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] md:h-[48px] md:px-9 md:text-[14px]"
+                  >
+                    Load more
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </a>
+                )}
               </div>
             )}
           </div>

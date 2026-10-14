@@ -71,8 +71,8 @@ const rowTwo = testimonials.slice(5)
 
 function Card({ t }) {
   return (
-    <figure className="mr-[16px] flex h-[140px] w-[287px] shrink-0 select-none flex-col justify-between rounded-[20px] bg-white p-[14px] md:mr-[20px] md:h-[240px] md:w-[430px] md:p-6 xl:mr-[28px] xl:h-[312px] xl:w-[585px] xl:p-8">
-      <blockquote className="text-[8px] font-normal leading-[12px] text-black md:text-[14px] md:leading-[26px] xl:text-[18px] xl:leading-[38px]">
+    <figure className="mr-[16px] flex h-[220px] w-[300px] shrink-0 select-none flex-col justify-between rounded-[20px] bg-white p-5 md:mr-[20px] md:h-[250px] md:w-[430px] md:p-6 xl:mr-[28px] xl:h-[312px] xl:w-[585px] xl:p-8">
+      <blockquote className="text-[13px] font-normal leading-[20px] text-black md:text-[15px] md:leading-[26px] xl:text-[18px] xl:leading-[34px]">
         {t.text}
       </blockquote>
 
@@ -88,13 +88,13 @@ function Card({ t }) {
               t.name
             )}&background=D94801&color=fff&size=200`
           }}
-          className="h-[49px] w-[49px] shrink-0 rounded-full object-cover md:h-[64px] md:w-[64px] xl:h-[89px] xl:w-[89px]"
+          className="h-[48px] w-[48px] shrink-0 rounded-full object-cover md:h-[60px] md:w-[60px] xl:h-[89px] xl:w-[89px]"
         />
-        <div className="flex flex-col text-left">
+        <div className="flex min-w-0 flex-col text-left">
           <span className="text-[13px] font-bold leading-[18px] text-black md:text-[15px] md:leading-[22px] xl:text-[18px] xl:leading-[28px]">
             {t.name}
           </span>
-          <span className="text-[12px] font-normal leading-[16px] text-black/70 md:leading-[20px] xl:leading-[38px]">
+          <span className="text-[12px] font-normal leading-[16px] text-black/70 md:text-[13px] md:leading-[20px] xl:text-[14px] xl:leading-[24px]">
             {t.role}
           </span>
         </div>
@@ -214,43 +214,50 @@ export default function Testimonials() {
     <section
       ref={sectionRef}
       id="testimonials"
-      className="flex w-full flex-col justify-center overflow-hidden bg-black px-0 py-16 font-['Libre_Baskerville',serif] md:py-24 xl:min-h-[min(65vw,1231px)] xl:py-20"
+      className="w-full overflow-hidden bg-black font-['Libre_Baskerville',serif]"
     >
-      {/* Heading */}
-      <div className="mx-auto flex max-w-[573px] flex-col items-center gap-3 px-4 text-center md:max-w-[760px] md:gap-5 xl:gap-6">
-        <span
-          className={`text-[8px] font-bold uppercase leading-[20px] tracking-[0.16em] text-white md:text-[12px] xl:text-[16px] xl:leading-[38px] ${reveal(
-            'delay-[100ms]'
-          )}`}
-        >
-          Testimonials
-        </span>
+      {/* Max width wrapper: everything stops growing at 1440px and stays centred when zoomed out */}
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col justify-center py-16 md:py-24 xl:min-h-[min(65vw,1231px)] xl:py-20">
+        {/* Heading */}
+        <div className="mx-auto flex max-w-[573px] flex-col items-center gap-3 px-4 text-center md:max-w-[760px] md:gap-5 xl:gap-6">
+          <span
+            className={`text-[11px] font-bold uppercase leading-[20px] tracking-[0.16em] text-white md:text-[12px] xl:text-[16px] xl:leading-[38px] ${reveal(
+              'delay-[100ms]'
+            )}`}
+          >
+            Testimonials
+          </span>
 
-        <h2
-          className={`text-[22px] font-bold leading-[30px] text-white md:text-[34px] md:leading-[42px] xl:text-[48px] xl:leading-[59px] ${reveal(
-            'delay-[200ms]'
-          )}`}
-        >
-          Review from Our Clients
-        </h2>
+          <h2
+            className={`text-[28px] font-bold leading-[36px] text-white md:text-[38px] md:leading-[46px] xl:text-[48px] xl:leading-[59px] ${reveal(
+              'delay-[200ms]'
+            )}`}
+          >
+            Review from Our Clients
+          </h2>
 
-        <p
-          className={`text-[11px] font-normal leading-[16px] text-white/70 md:text-[14px] md:leading-[22px] xl:text-[18px] xl:leading-[28px] ${reveal(
-            'delay-[300ms]'
-          )}`}
-        >
-          We value every projects and are committed to delivering quality work.
-        </p>
-      </div>
+          <p
+            className={`max-w-[340px] text-[14px] font-normal leading-[22px] text-white/70 md:max-w-none md:text-[15px] md:leading-[24px] xl:text-[18px] xl:leading-[28px] ${reveal(
+              'delay-[300ms]'
+            )}`}
+          >
+            We value every projects and are committed to delivering quality work.
+          </p>
+        </div>
 
-      {/* Two rows: top moves left, bottom moves right. 28px gap on desktop */}
-      <div
-        className={`mt-10 flex flex-col gap-[16px] md:mt-14 md:gap-[20px] xl:mt-16 xl:gap-[28px] ${reveal(
-          'delay-[450ms]'
-        )}`}
-      >
-        <MarqueeRow items={rowOne} dir={-1} speed={35} />
-        <MarqueeRow items={rowTwo} dir={1} speed={35} />
+        {/* Two rows: top moves left, bottom moves right */}
+        <div
+          className={`relative mt-10 md:mt-14 xl:mt-16 ${reveal('delay-[450ms]')}`}
+        >
+          <div className="flex flex-col gap-[16px] md:gap-[20px] xl:gap-[28px]">
+            <MarqueeRow items={rowOne} dir={-1} speed={35} />
+            <MarqueeRow items={rowTwo} dir={1} speed={35} />
+          </div>
+
+          {/* Soft edge fade so cards slide in and out smoothly at the max-width edges */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black to-transparent md:w-16 xl:w-32" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-black to-transparent md:w-16 xl:w-32" />
+        </div>
       </div>
     </section>
   )

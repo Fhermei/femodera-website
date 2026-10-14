@@ -128,205 +128,238 @@ export default function Contact({ onSuccess }) {
     }
   }
 
+  // 16px text on phones stops iPhones from zooming in when a field is tapped
   const fieldClass = (hasError) =>
-    `w-full rounded-[8px] border bg-transparent px-4 text-[12px] text-white outline-none transition placeholder:text-white/40 focus:border-[#D44B08] focus:ring-2 focus:ring-[#D44B08]/30 md:text-[13px] ${
-      hasError ? 'border-red-400' : 'border-white/60'
+    `w-full rounded-[10px] border bg-transparent px-4 text-[16px] text-white outline-none transition placeholder:text-white/40 focus:border-[#D44B08] focus:ring-2 focus:ring-[#D44B08]/30 md:text-[14px] ${
+      hasError ? 'border-red-400' : 'border-white/50'
     }`
 
-  const labelClass = 'mb-2 block text-[12px] font-normal text-white md:text-[12px] xl:text-[14px]'
-  const errorClass = 'mt-1.5 text-[11px] text-red-300'
+  const labelClass = 'mb-2 block text-[13px] font-normal text-white md:text-[13px] xl:text-[14px]'
+  const errorClass = 'mt-1.5 text-[12px] leading-[16px] text-red-300'
 
   return (
     <section
       ref={sectionRef}
       id="contact"
-      className="w-full overflow-hidden bg-[#021230] font-['Libre_Baskerville',serif] lg:flex lg:min-h-[min(73.6vw,1060px)]"
+      className="w-full overflow-hidden bg-[#021230] font-['Libre_Baskerville',serif]"
     >
-      {/* LEFT: heading + form. Starts where the navbar starts on the left */}
-      <div className="flex w-full items-center px-4 py-14 md:px-8 md:py-20 lg:w-[52.1%] lg:shrink-0 lg:px-6 lg:py-16 lg:pl-[max(24px,calc((100vw_-_1292px)/2))] lg:pr-10">
-        <div className="mx-auto w-full max-w-[573px] md:max-w-[640px] lg:mx-0 lg:max-w-[520px]">
-          {/* Heading block */}
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <span
-              className={`text-[6px] font-bold uppercase leading-[20px] tracking-[0.16em] text-white md:text-[10px] lg:text-[12px] lg:leading-[38px] xl:text-[16px] ${reveal(
-                'delay-[100ms]'
-              )}`}
-            >
-              Contact Us
-            </span>
-
-            <h2
-              className={`mt-3 text-[22px] font-bold leading-[30px] text-white md:text-[34px] md:leading-[42px] lg:mt-4 lg:text-[36px] lg:leading-[46px] xl:text-[48px] xl:leading-[59px] ${reveal(
-                'delay-[200ms]'
-              )}`}
-            >
-              <span className="lg:hidden">Review from Our Clients</span>
-              <span className="hidden lg:inline">
-                Have a Project in
-                <br />
-                Mind?
-              </span>
-            </h2>
-
-            {/* Mobile only: image (kept short so it doesn't dominate the screen) */}
-            <img
-              src="/contact/contact.png"
-              alt="Researcher working in a library"
-              className={`mt-6 aspect-[335/170] w-full rounded-[16px] object-cover object-[center_28%] md:mt-8 md:aspect-[640/280] lg:hidden ${reveal(
-                'delay-[300ms]'
-              )}`}
-            />
-
-            <p
-              className={`mt-5 max-w-[300px] text-[11px] font-normal leading-[16px] text-white/80 md:mt-6 md:max-w-[480px] md:text-[14px] md:leading-[22px] lg:mt-6 lg:max-w-none lg:text-[15px] lg:leading-[24px] xl:text-[18px] xl:leading-[28px] ${reveal(
-                'delay-[300ms]'
-              )}`}
-            >
-              <span className="lg:hidden">
-                Have a project in mind? We&apos;d love to hear from you.
-              </span>
-              <span className="hidden lg:inline">
-                Send us a message and let&apos;s discuss how we can help you achieve your goals.
-              </span>
-            </p>
-          </div>
-
-          {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            className={`mt-8 flex flex-col gap-[18px] lg:mt-10 xl:mt-12 xl:gap-[22px] ${reveal(
-              'delay-[450ms]'
-            )}`}
-          >
-            <div>
-              <label htmlFor="contact-name" className={labelClass}>
-                Full Name <span className="text-[#D44B08]">*</span>
-              </label>
-              <input
-                type="text"
-                id="contact-name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Your full name"
-                className={`h-[44px] xl:h-[45px] ${fieldClass(errors.name)}`}
-              />
-              {errors.name && <p className={errorClass}>{errors.name}</p>}
-            </div>
-
-            <div>
-              <label htmlFor="contact-email" className={labelClass}>
-                Email Address <span className="text-[#D44B08]">*</span>
-              </label>
-              <input
-                type="email"
-                id="contact-email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="you@gmail.com"
-                className={`h-[44px] xl:h-[45px] ${fieldClass(errors.email)}`}
-              />
-              {errors.email && <p className={errorClass}>{errors.email}</p>}
-            </div>
-
-            <div>
-              <label htmlFor="contact-phone" className={labelClass}>
-                Phone Number <span className="text-[#D44B08]">*</span>
-              </label>
-              <input
-                type="tel"
-                id="contact-phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="+234 111 111 0000"
-                className={`h-[44px] xl:h-[45px] ${fieldClass(errors.phone)}`}
-              />
-              {errors.phone && <p className={errorClass}>{errors.phone}</p>}
-            </div>
-
-            <div>
-              <label htmlFor="contact-message" className={labelClass}>
-                Message <span className="text-[#D44B08]">*</span>
-              </label>
-              <textarea
-                id="contact-message"
-                name="message"
-                rows={3}
-                value={formData.message}
-                onChange={handleChange}
-                required
-                placeholder="Tell us about your project ...."
-                className={`min-h-[88px] resize-none py-3 ${fieldClass(errors.message)}`}
-              />
-              {errors.message && <p className={errorClass}>{errors.message}</p>}
-            </div>
-
-            {submitError && (
-              <div
-                role="alert"
-                className="rounded-[8px] border border-red-400/40 bg-red-500/10 p-3 text-[12px] text-red-200"
+      {/* Max width wrapper: the whole design stops growing at 1440px and stays centred when zoomed out */}
+      <div className="mx-auto w-full max-w-[1440px] lg:flex lg:min-h-[min(73.6vw,1060px)]">
+        {/* LEFT: heading + form. Starts where the navbar starts on the left */}
+        <div className="flex w-full items-center px-4 py-14 md:px-8 md:py-20 lg:w-[52.1%] lg:shrink-0 lg:py-16 lg:pl-[max(24px,calc((min(100vw,1440px)_-_1292px)/2))] lg:pr-10">
+          <div className="mx-auto w-full max-w-[573px] md:max-w-[640px] lg:mx-0 lg:max-w-[520px]">
+            {/* Heading block */}
+            <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+              <span
+                className={`text-[11px] font-bold uppercase leading-[20px] tracking-[0.16em] text-white md:text-[12px] lg:text-[12px] lg:leading-[38px] xl:text-[16px] ${reveal(
+                  'delay-[100ms]'
+                )}`}
               >
-                {submitError}
-              </div>
-            )}
+                Contact Us
+              </span>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="group mt-2 inline-flex h-[40px] w-full items-center justify-center gap-2 rounded-full bg-[#D44B08] text-[12px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.4)] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none xl:h-[44px] xl:text-[14px]"
+              <h2
+                className={`mt-3 text-[28px] font-bold leading-[35px] text-white md:text-[38px] md:leading-[46px] lg:mt-4 lg:text-[36px] lg:leading-[46px] xl:text-[48px] xl:leading-[59px] ${reveal(
+                  'delay-[200ms]'
+                )}`}
+              >
+                <span className="lg:hidden">Have a Project in Mind?</span>
+                <span className="hidden lg:inline">
+                  Have a Project in
+                  <br />
+                  Mind?
+                </span>
+              </h2>
+
+              {/* Mobile + tablet: image (kept short so it doesn't dominate the screen) */}
+              <img
+                src="/contact/contact.png"
+                alt="Researcher working in a library"
+                className={`mt-6 aspect-[335/180] w-full rounded-[16px] object-cover object-[center_28%] md:mt-8 md:aspect-[640/280] md:rounded-[20px] lg:hidden ${reveal(
+                  'delay-[300ms]'
+                )}`}
+              />
+
+              <p
+                className={`mt-5 max-w-[340px] text-[14px] font-normal leading-[22px] text-white/80 md:mt-6 md:max-w-[520px] md:text-[15px] md:leading-[26px] lg:mt-6 lg:max-w-none lg:text-[15px] lg:leading-[24px] xl:text-[18px] xl:leading-[28px] ${reveal(
+                  'delay-[300ms]'
+                )}`}
+              >
+                <span className="lg:hidden">
+                  Send us a message and we&apos;d love to hear about your project.
+                </span>
+                <span className="hidden lg:inline">
+                  Send us a message and let&apos;s discuss how we can help you achieve your goals.
+                </span>
+              </p>
+            </div>
+
+            {/* Form */}
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className={`mt-8 flex flex-col gap-[18px] lg:mt-10 xl:mt-12 xl:gap-[22px] ${reveal(
+                'delay-[450ms]'
+              )}`}
             >
-              {isSubmitting ? (
-                <>
-                  <svg
-                    className="h-4 w-4 animate-spin text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  Sending...
-                </>
-              ) : (
-                <>
-                  Send Message
-                  <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1 xl:h-4 xl:w-4" />
-                </>
+              <div>
+                <label htmlFor="contact-name" className={labelClass}>
+                  Full Name <span className="text-[#D44B08]">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  autoComplete="name"
+                  placeholder="Your full name"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'contact-name-error' : undefined}
+                  className={`h-[48px] md:h-[46px] xl:h-[48px] ${fieldClass(errors.name)}`}
+                />
+                {errors.name && (
+                  <p id="contact-name-error" className={errorClass}>
+                    {errors.name}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="contact-email" className={labelClass}>
+                  Email Address <span className="text-[#D44B08]">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  autoComplete="email"
+                  placeholder="you@gmail.com"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? 'contact-email-error' : undefined}
+                  className={`h-[48px] md:h-[46px] xl:h-[48px] ${fieldClass(errors.email)}`}
+                />
+                {errors.email && (
+                  <p id="contact-email-error" className={errorClass}>
+                    {errors.email}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="contact-phone" className={labelClass}>
+                  Phone Number <span className="text-[#D44B08]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="contact-phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  autoComplete="tel"
+                  placeholder="+234 111 111 0000"
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
+                  className={`h-[48px] md:h-[46px] xl:h-[48px] ${fieldClass(errors.phone)}`}
+                />
+                {errors.phone && (
+                  <p id="contact-phone-error" className={errorClass}>
+                    {errors.phone}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label htmlFor="contact-message" className={labelClass}>
+                  Message <span className="text-[#D44B08]">*</span>
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Tell us about your project ...."
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? 'contact-message-error' : undefined}
+                  className={`min-h-[110px] resize-none py-3 xl:min-h-[120px] ${fieldClass(errors.message)}`}
+                />
+                {errors.message && (
+                  <p id="contact-message-error" className={errorClass}>
+                    {errors.message}
+                  </p>
+                )}
+              </div>
+
+              {submitError && (
+                <div
+                  role="alert"
+                  className="rounded-[10px] border border-red-400/40 bg-red-500/10 p-3 text-[13px] leading-[19px] text-red-200"
+                >
+                  {submitError}
+                </div>
               )}
-            </button>
-          </form>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group mt-2 inline-flex h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[#D44B08] text-[15px] font-semibold text-white outline-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.4)] focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-2 focus-visible:ring-offset-[#021230] active:translate-y-0 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none md:h-[50px] md:text-[14px] xl:h-[52px]"
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="h-4 w-4 animate-spin text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
 
-      {/* Orange bar (desktop): 67 x 1060 */}
-      <div className="hidden w-[4.65%] shrink-0 bg-[#D94801] lg:block" />
+        {/* Orange bar (desktop): 67 x 1060 */}
+        <div className="hidden w-[4.65%] shrink-0 bg-[#D94801] lg:block" />
 
-      {/* Image (desktop): fills the rest and runs to the right edge */}
-      <div className="relative hidden flex-1 lg:block">
-        <img
-          src="/contact/contact.png"
-          alt="Researcher working in a library"
-          className={`absolute inset-0 h-full w-full object-cover object-[60%_center] transition-opacity duration-1000 motion-reduce:transition-none ${
-            isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
+        {/* Image (desktop): fills the rest and runs to the right edge of the wrapper */}
+        <div className="relative hidden flex-1 lg:block">
+          <img
+            src="/contact/contact.png"
+            alt="Researcher working in a library"
+            className={`absolute inset-0 h-full w-full object-cover object-[60%_center] transition-opacity duration-1000 motion-reduce:transition-none ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+          {/* Soft fade so the image blends into the page when the screen is wider than 1440px */}
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#021230] to-transparent" />
+        </div>
       </div>
     </section>
   )

@@ -27,7 +27,7 @@ export default function AboutUs({ onGetStarted }) {
     }`
 
   const body =
-    'text-[12px] font-normal leading-[22px] text-black/70 md:text-[14px] md:leading-[26px] lg:text-[15px] lg:leading-[28px] xl:text-[18px] xl:leading-[38px]'
+    'max-w-[560px] text-[14px] font-normal leading-[24px] text-black/70 md:max-w-[620px] md:text-[15px] md:leading-[28px] lg:max-w-none lg:text-[15px] lg:leading-[28px] xl:text-[18px] xl:leading-[34px]'
 
   return (
     <section
@@ -69,7 +69,7 @@ export default function AboutUs({ onGetStarted }) {
         {/* RIGHT: everything centred in the right side */}
         <div className="flex flex-col items-center text-center lg:justify-center lg:pl-[18%]">
           <span
-            className={`order-1 text-[6px] font-normal uppercase leading-[20px] tracking-[0.16em] text-[#D94801] md:text-[12px] md:leading-[38px] lg:text-[16px] ${reveal(
+            className={`order-1 text-[11px] font-normal uppercase leading-[20px] tracking-[0.16em] text-[#D94801] md:text-[12px] md:leading-[30px] lg:text-[16px] lg:leading-[38px] ${reveal(
               'delay-[100ms]'
             )}`}
           >
@@ -77,18 +77,18 @@ export default function AboutUs({ onGetStarted }) {
           </span>
 
           <h2
-            className={`order-2 mt-2 text-[22px] font-bold leading-[30px] text-[#091E4C] md:mt-3 md:text-[34px] md:leading-[38px] lg:mt-4 lg:text-[48px] ${reveal(
+            className={`order-2 mt-2 text-[28px] font-bold leading-[34px] text-[#091E4C] md:mt-3 md:text-[38px] md:leading-[44px] lg:mt-4 lg:text-[48px] lg:leading-[54px] ${reveal(
               'delay-[200ms]'
             )}`}
           >
             About Us
           </h2>
 
-          {/* Mobile only: image 1 */}
+          {/* Mobile + tablet only: image 1 */}
           <img
             src={img.main}
             alt="Researcher reading in a library"
-            className={`order-3 mt-6 aspect-[335/160] w-full rounded-[16px] object-cover lg:hidden ${reveal(
+            className={`order-3 mt-6 aspect-[335/190] w-full rounded-[16px] object-cover md:aspect-[760/340] md:rounded-[20px] lg:hidden ${reveal(
               'delay-[300ms]'
             )}`}
           />
@@ -99,7 +99,7 @@ export default function AboutUs({ onGetStarted }) {
             engineering, artificial intelligence, and academic rigor.
           </p>
 
-          <p className={`order-5 mt-6 lg:mt-8 ${body} ${reveal('delay-[400ms]')}`}>
+          <p className={`order-5 mt-5 lg:mt-8 ${body} ${reveal('delay-[400ms]')}`}>
             Founded by <span className="font-bold text-[#091E4C]">Oyewole Oluwafemi David</span>, we
             bring together deep expertise in software development, machine learning, data science, and
             academic research to deliver impactful solutions for clients across industries from
@@ -107,7 +107,7 @@ export default function AboutUs({ onGetStarted }) {
           </p>
 
           {/* "Our approach": BELOW the button on mobile (order-7), ABOVE the button on desktop (lg:order-6) */}
-          <p className={`order-7 mt-8 lg:order-6 lg:mt-8 ${body} ${reveal('delay-[500ms]')}`}>
+          <p className={`order-7 mt-6 lg:order-6 lg:mt-8 ${body} ${reveal('delay-[500ms]')}`}>
             Our approach combines technical excellence with research integrity, ensuring every
             project is built on sound methodology, clean code, and verifiable results. We
             don&apos;t believe in shortcuts. we believe in thoughtful engineering that delivers
@@ -117,29 +117,33 @@ export default function AboutUs({ onGetStarted }) {
           {/* Button: order-6 on mobile (above the paragraph), lg:order-7 on desktop (below the paragraph) */}
           <button
             onClick={onGetStarted}
-            className={`group order-6 mt-8 inline-flex h-[36px] w-[168px] items-center justify-center gap-1 rounded-full bg-[#D44B08] text-[12px] font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] active:translate-y-0 active:scale-[0.98] lg:order-7 lg:mt-10 lg:h-[48px] lg:w-[190px] lg:text-[14px] ${reveal(
+            className={`group order-6 mt-7 inline-flex h-[44px] items-center justify-center gap-2 rounded-full bg-[#D44B08] px-7 text-[13px] font-semibold text-white outline-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] md:h-[46px] md:px-8 md:text-[14px] lg:order-7 lg:mt-10 lg:h-[48px] lg:w-[190px] lg:px-0 ${reveal(
               'delay-[600ms]'
             )}`}
           >
             Start Project
-            <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1 lg:h-4 lg:w-4" />
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 lg:h-4 lg:w-4" />
           </button>
 
           {/* Stats */}
           <div
-            className={`order-8 mt-10 flex items-start justify-center gap-12 lg:mt-12 lg:gap-16 ${reveal(
+            className={`order-8 mt-10 flex items-start justify-center gap-0 lg:mt-12 ${reveal(
               'delay-[700ms]'
             )}`}
           >
-            <div className="text-center">
-              <p className="text-[24px] font-bold leading-none text-[#081F4C] lg:text-[32px]">100 +</p>
-              <p className="mt-2 text-[10px] italic text-[#081F4C]/80 lg:text-[14px]">
+            <div className="px-8 text-center md:px-10 lg:px-8">
+              <p className="text-[30px] font-bold leading-none text-[#081F4C] md:text-[34px] lg:text-[32px]">
+                100 +
+              </p>
+              <p className="mt-2 text-[12px] italic text-[#081F4C]/80 md:text-[13px] lg:text-[14px]">
                 Projects Delivered
               </p>
             </div>
-            <div className="text-center">
-              <p className="text-[24px] font-bold leading-none text-[#081F4C] lg:text-[32px]">70 +</p>
-              <p className="mt-2 text-[10px] italic text-[#081F4C]/80 lg:text-[14px]">
+            <div className="border-l border-[#081F4C]/15 px-8 text-center md:px-10 lg:px-8">
+              <p className="text-[30px] font-bold leading-none text-[#081F4C] md:text-[34px] lg:text-[32px]">
+                70 +
+              </p>
+              <p className="mt-2 text-[12px] italic text-[#081F4C]/80 md:text-[13px] lg:text-[14px]">
                 Clients Served
               </p>
             </div>

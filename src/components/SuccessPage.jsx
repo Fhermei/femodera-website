@@ -1,5 +1,23 @@
 import { useEffect } from 'react'
-import { CheckCircle, Mail, ArrowLeft, Home, Clock, Sparkles } from 'lucide-react'
+import { CheckCircle, Mail, Home, Clock, Sparkles } from 'lucide-react'
+
+const info = [
+  {
+    Icon: Mail,
+    title: "What's Next?",
+    text: 'Our team will review your message and respond within 24 hours.',
+  },
+  {
+    Icon: Clock,
+    title: 'Response Time',
+    text: 'We typically respond within 24 hours during business days.',
+  },
+  {
+    Icon: Sparkles,
+    title: 'Quick Tip',
+    text: 'While you wait, feel free to explore our projects and services.',
+  },
+]
 
 export default function SuccessPage({ onBackHome }) {
   useEffect(() => {
@@ -7,77 +25,51 @@ export default function SuccessPage({ onBackHome }) {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white pt-20 pb-180 flex items-center justify-center">
-      <div className="max-w-lg w-full mx-4">
-        <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 sm:p-8 text-center">
+    <div className="flex min-h-[100dvh] items-center justify-center bg-gradient-to-b from-[#F5F5F5] to-white px-4 pb-16 pt-[110px] font-['Libre_Baskerville',serif] md:pt-[130px]">
+      <div className="w-full max-w-[560px]">
+        <div className="rounded-[28px] border border-black/5 bg-white p-6 text-center shadow-[0_10px_40px_rgba(9,30,76,0.08)] md:p-10">
           {/* Icon */}
-          <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+          <div className="mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center rounded-full bg-green-100 md:h-[84px] md:w-[84px]">
             <CheckCircle size={40} className="text-green-600" />
           </div>
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-[24px] font-bold leading-[1.25] text-[#091E4C] md:text-[32px]">
             Message Sent Successfully!
           </h1>
+          <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#D44B08]" />
 
           {/* Message */}
-          <p className="text-sm sm:text-base text-gray-500 mb-1">
-            Thank you for reaching out to us.
-          </p>
-          <p className="text-sm sm:text-base text-gray-500">
-            We've received your message and will get back to you within 24 hours.
+          <p className="mt-4 text-[15px] leading-[24px] text-black/70 md:text-[16px] md:leading-[26px]">
+            Thank you for reaching out to us. We&apos;ve received your message and will get back to
+            you within 24 hours.
           </p>
 
-          {/* Info Cards */}
-          <div className="mt-6 space-y-3 text-left">
-            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-              <Mail size={18} className="text-[#D94801] flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-700">What's Next?</p>
-                <p className="text-[10px] sm:text-xs text-gray-500">
-                  Our team will review your message and respond within 24 hours.
-                </p>
-              </div>
-            </div>
+          {/* Info cards */}
+          <ul className="mt-7 flex flex-col gap-3 text-left">
+            {info.map(({ Icon, title, text }) => (
+              <li key={title} className="flex items-start gap-3 rounded-[16px] bg-[#F5F5F5] p-4">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white">
+                  <Icon size={18} className="text-[#D94801]" />
+                </span>
+                <div>
+                  <p className="text-[14px] font-bold leading-[20px] text-[#091E4C]">{title}</p>
+                  <p className="mt-0.5 text-[13px] leading-[20px] text-black/65">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
 
-            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-              <Clock size={18} className="text-[#D94801] flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-700">Response Time</p>
-                <p className="text-[10px] sm:text-xs text-gray-500">
-                  We typically respond within 24 hours during business days.
-                </p>
-              </div>
-            </div>
+          {/* Action */}
+          <button
+            onClick={onBackHome}
+            className="group mt-8 inline-flex h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[#D44B08] text-[15px] font-semibold text-white outline-none transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B93F06] hover:shadow-[0_8px_20px_rgba(212,75,8,0.35)] focus-visible:ring-2 focus-visible:ring-[#D44B08] focus-visible:ring-offset-2 active:translate-y-0 active:scale-[0.98] sm:w-auto sm:px-12 md:text-[14px]"
+          >
+            <Home size={16} />
+            Back to Home
+          </button>
 
-            <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-              <Sparkles size={18} className="text-[#D94801] flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-[10px] sm:text-xs font-semibold text-gray-700">Quick Tip</p>
-                <p className="text-[10px] sm:text-xs text-gray-500">
-                  While you wait, feel free to explore our projects and services.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={onBackHome}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium text-white bg-[#D94801] rounded-lg hover:bg-[#C24000] transition-all duration-200 flex-1 justify-center"
-            >
-              <Home size={14} /> Go Home
-            </button>
-            <button
-              onClick={onBackHome}
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 border border-gray-200 bg-white rounded-lg hover:bg-gray-50 transition-all duration-200 flex-1 justify-center"
-            >
-              <ArrowLeft size={14} /> Back
-            </button>
-          </div>
-
-          <p className="text-[9px] sm:text-[10px] text-gray-400 mt-6">
+          <p className="mt-6 text-[12px] leading-[18px] text-black/45">
             A confirmation has been sent to your email inbox.
           </p>
         </div>
